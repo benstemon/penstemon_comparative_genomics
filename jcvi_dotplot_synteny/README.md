@@ -108,6 +108,9 @@ python -m jcvi.graphics.karyotype seqids.txt layout.txt -o karyotype_barbatus.da
 
 ```
 
+And here is the finished product!
+![karyotype_image](karyotype_barbatus.davidsonii.petiolatus.smallii.png)
+
 
 
 
