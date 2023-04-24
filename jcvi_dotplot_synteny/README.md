@@ -36,6 +36,9 @@ gffread Rnd1.all.maker.snapdragon.noseq.gff --bed --keep-genes --sort-alpha -o p
 
 #for smallii:
 gffread smallii_NAMECHANGE_final_annotation.gff --bed --keep-genes --sort-alpha -o smallii_NAMECHANGE_PGA-genes_CMKEVH.bed
+
+#for smallii_refdenovo:
+gffread outfiles_gemoma/final_annotation.gff --bed --keep-genes --sort-alpha -o smallii_refdenovo-genes_CMKEVH.bed
 ```
 
 b. filter the bed file to include only a single isoform (longest) with `filter_isoforms_bedfile-*species*.py`. These are species-specific scripts dependent on the gene model names given to species in their annotation files.
@@ -51,6 +54,9 @@ python filter_isoforms_bedfile-petiolatus.py petiolatus-genes_CMKEVH.bed petiola
 
 #for smallii:
 python filter_isoforms_bedfile-smallii.py smallii_NAMECHANGE_PGA-genes_CMKEVH.bed smallii_NAMECHANGE_PGA-genes_CMKEVH-single-isoform.bed
+
+#for smallii_refdenovo:
+# I initially did not make new names for annotations, so filtering will not work here. Protocol changed for future reference. File name changed to single-isoform for the moment.
 ```
 
 
@@ -81,6 +87,12 @@ gffread -y smallii_NAMECHANGE_PGA_CMKEVH-single-isoform-protein.fasta -C -M -K -
 
 gffread -x smallii_NAMECHANGE_PGA_CMKEVH-single-isoform-nucleotide.cds -C -M -K -E -V -H --sort-alpha -g smallii_NAMECHANGE_PGA_assembly.fasta smallii_NAMECHANGE_PGA-genes_CMKEVH-single-isoform.bed
 
+
+#for smallii_refdenovo:
+gffread -y smallii_refdenovo_CMKEVH-single-isoform-protein.fasta -C -M -K -E -V -H --sort-alpha -g ragtag.scaffold.fasta smallii_refdenovo-genes_CMKEVH-single-isoform.bed
+
+gffread -x smallii_refdenovo_CMKEVH-single-isoform-nucleotide.cds -C -M -K -E -V -H --sort-alpha -g ragtag.scaffold.fasta smallii_refdenovo-genes_CMKEVH-single-isoform.bed
+
 ```
 We should now have single-isoform bedfiles and the respective fasta sequence files for all of the genomes of interest. *Note that I subsequently copied these output bed files into a new directory, and changed file names to be more concise*
 
@@ -94,17 +106,21 @@ conda activate jcvi
 python -m jcvi.compara.catalog ortholog barbatus davidsonii --cscore=.99 --dbtype=nucl
 python -m jcvi.compara.catalog ortholog barbatus smallii --cscore=.99 --dbtype=nucl
 python -m jcvi.compara.catalog ortholog davidsonii petiolatus --cscore=.99 --dbtype=nucl
+python -m jcvi.compara.catalog ortholog smallii smallii_refdenovo --cscore=.99 --dbtype=nucl
 
 
 #extract subsets of blocks from anchorfile --minspan=30 --
 python -m jcvi.compara.synteny screen --simple barbatus.davidsonii.anchors barbatus.davidsonii.anchors.new
 python -m jcvi.compara.synteny screen --simple barbatus.smallii.anchors barbatus.smallii.anchors.new
 python -m jcvi.compara.synteny screen --simple davidsonii.petiolatus.anchors davidsonii.petiolatus.anchors.new
+python -m jcvi.compara.synteny screen --simple smallii.smallii_refdenovo.anchors smallii.smallii_refdenovo.anchors.new
 
 
 #after organizing the seqids.txt and layout.txt files...
 python -m jcvi.graphics.karyotype seqids.txt layout.txt -o karyotype_barbatus.davidsonii.petiolatus.smallii.pdf
 
+###FOR TESTING -- smallii_refdenovo
+python -m jcvi.graphics.karyotype seqids_smallii_denovo.txt layout_smallii_denovo.txt -o karyotype_barbatus.davidsonii.petiolatus.smallii.smallii_denovo.pdf
 
 ```
 
