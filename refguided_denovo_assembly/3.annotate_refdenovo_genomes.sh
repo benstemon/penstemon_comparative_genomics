@@ -38,7 +38,7 @@ ref3gff="/work/bs66/project_compare_genomes/petiolatus/Rnd1.all.maker.snapdragon
 
   #run GeMoMa
   #make new names so that they can be filtered appropriately later on (or not)
-  GeMoMa GeMoMaPipeline threads=$NThreads AnnotationFinalizer.r=YES p=true o=false\
+  GeMoMa GeMoMaPipeline threads=$NThreads AnnotationFinalizer.r=NO p=true o=false\
    t=ragtag.scaffold.fasta outdir=outfiles_gemoma/ \
    s=own i=barbatus a=$ref1gff g=$ref1fa \
    s=own i=davidsonii a=$ref2gff g=$ref2fa \
