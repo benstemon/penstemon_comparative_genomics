@@ -784,7 +784,7 @@ mkdir ${workPath}
   
   #run quast
   cd ${workPathFiles}/${name}_final_output
-  python $progQuast -o quast_scaffold_stats -t $NThreads ragtag.scaffold.fasta
+  python $progQuast -o quast_scaffold_stats -t $NThreads ${outname}_refdenovo-genome.fasta
   
   mv $log ${workPathFiles}/${name}_final_output
 
