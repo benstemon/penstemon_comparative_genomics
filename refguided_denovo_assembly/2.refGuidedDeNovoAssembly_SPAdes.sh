@@ -62,14 +62,30 @@ module load java
 module load bedtools
 
 #necessary conda installs
-#samtools
-#bamtools
-#bwa
-#fastqc
-#multiqc
-#fastp
-#soapdenovo2
-#soapdenovo2-prepare
+#QC:
+	#fastqc
+	#multiqc
+	#fastp
+
+#mapping_etc
+	#bwa
+	#samtools
+	#bamtools
+	#seqtk
+
+#refdenovo
+	#AMOScmp
+	#soapdenovo2
+	#soapdenovo2-prepare
+
+#ragtag
+	#RagTag
+
+#gemoma
+	#GeMoMa
+
+#busco
+	#Busco
 
 
 #########################################################
