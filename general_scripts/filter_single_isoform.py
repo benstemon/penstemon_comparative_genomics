@@ -1,4 +1,5 @@
 """
+From: https://github.com/MayroseLab/Panoramic/blob/master/util/filter_fasta_by_gff.py
 Takes a gff file and for genes with
 multiple mRNAs, only keeps the longest
 (largest sum of exon lengths). Prints

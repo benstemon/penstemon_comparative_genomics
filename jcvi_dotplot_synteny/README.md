@@ -22,7 +22,7 @@ LaTex can be found [here](https://www.latex-project.org/get/).
 
 # 4. Preparing input files
 We need genome.fa files and .gff3 files for each of the reference genomes of interest.
-a. Use python script to filter the a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
+a. Use [`python script`](/tree/main/general_scripts/filter_single_isoform.py) to filter the a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
 
 ```shell
 #for barbatus:
