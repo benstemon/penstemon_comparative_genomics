@@ -22,28 +22,30 @@ LaTex can be found [here](https://www.latex-project.org/get/).
 
 # 4. Preparing input files
 We need genome.fa files and .gff3 files for each of the reference genomes of interest.
-a. Use [`python script`](/tree/main/general_scripts/filter_single_isoform.py) to filter the a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
+a. Use [`python script`](/general_scripts/filter_single_isoform_scaflength_conditional.py) to filter the a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
+
+* Note: new option (6/1/23) to additionally include a fasta.fai and minimum length parameter to filter out genes on scaffolds shorter than the minimum length threshold. E.g., `python filter_single_isoform_scaflength_conditional.py infile.gff outfile.gff infile_genome.fai 100000` would additionally filter all genes on scaffolds shorter than 100kbp.
 
 ```shell
 #for barbatus:
-python filter_single_isoform.py M4_annotation_putative_function_domain_added_blast_tomato.genemodels.noseq.gff single_isoform_barbatus_M4_annotation.gff
+python filter_single_isoform_scaflength_conditional.py M4_annotation_putative_function_domain_added_blast_tomato.genemodels.noseq.gff single_isoform_barbatus_M4_annotation.gff
 
 
 #for davidsonii:
 #first use preliminary script to keep only genemodels and related functions
 python keep_maker_genemodels.py annot_Pdavidsonii_genome_FUNCTIONAL-INCLUDED.gff annot_Pdavidsonii_genome_FUNCTIONAL-INCLUDED.genemodels.gff
 
-python filter_single_isoform.py annot_Pdavidsonii_genome_FUNCTIONAL-INCLUDED.genemodels.gff single_isoform_davidsonii_FUNCTIONAL-INCLUDED.gff
+python filter_single_isoform_scaflength_conditional.py annot_Pdavidsonii_genome_FUNCTIONAL-INCLUDED.genemodels.gff single_isoform_davidsonii_FUNCTIONAL-INCLUDED.gff
 
 
 #for petiolatus:
 python keep_maker_genemodels.py Rnd1.all.maker.snapdragon.noseq.gff Rnd1.all.maker.snapdragon.noseq.genemodels.gff
 
-python filter_single_isoform.py Rnd1.all.maker.snapdragon.noseq.genemodels.gff single_isoform_petiolatus.gff
+python filter_single_isoform_scaflength_conditional.py Rnd1.all.maker.snapdragon.noseq.genemodels.gff single_isoform_petiolatus.gff
 
 
 #for smallii:
-python filter_single_isoform.py smallii_NAMECHANGE_final_annotation.gff single_isoform_smallii_NAMECHANGE.gff
+python filter_single_isoform_scaflength_conditional.py smallii_NAMECHANGE_final_annotation.gff single_isoform_smallii_NAMECHANGE.gff
 
 ```
 
