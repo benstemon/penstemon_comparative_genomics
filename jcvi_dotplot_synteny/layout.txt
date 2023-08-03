@@ -1,0 +1,9 @@
+# y, xstart, xend, rotation, color, label, va,  bed
+ .8,     .12,    .86,      0,      green,  petiolatus, top, petiolatus.bed
+ .6,     .26,    .74,      0,      blue,   davidsonii, top, davidsonii.bed
+ .4,     .1,    .9,      0,      red,    barbatus, top, barbatus.bed
+ .2,     .23,    .77,      0,      orange, smallii, bottom, smallii.bed
+# edges
+e, 0, 1, davidsonii.petiolatus.anchors.simple
+e, 1, 2, barbatus.davidsonii.anchors.simple
+e, 2, 3, barbatus.smallii.anchors.simple

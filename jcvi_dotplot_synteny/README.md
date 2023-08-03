@@ -10,7 +10,7 @@ pip install jcvi
 ```
 
 # 2. Install LAST
-Conda install will not work for some reason. Last can be found [here](https://gitlab.com/mcfrith/last). After using makefile, copy files in last/bin to software bin and add to PATH variable
+Conda install will not work with jcvi for some reason. Last can be found [here](https://gitlab.com/mcfrith/last). After using makefile, copy files in last/bin to software bin and add to PATH variable
 ```
 cp * /Users/benstone/software
 sudo echo /Users/benstone/software >> /etc/paths
@@ -22,7 +22,7 @@ LaTex can be found [here](https://www.latex-project.org/get/).
 
 # 4. Preparing input files
 We need genome.fa files and .gff3 files for each of the reference genomes of interest.
-a. Use [`python script`](/general_scripts/filter_single_isoform_scaflength_conditional.py) to filter the a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
+a. Use [`python script`](/general_scripts/filter_single_isoform_scaflength_conditional.py) to filter down to a single (longest) isoform/mRNA for each gene model. Input: genome.gff3
 
 * Note: new option (6/1/23) to additionally include a fasta.fai and minimum length parameter to filter out genes on scaffolds shorter than the minimum length threshold. E.g., `python filter_single_isoform_scaflength_conditional.py infile.gff outfile.gff infile_genome.fai 100000` would additionally filter all genes on scaffolds shorter than 100kbp.
 
@@ -46,11 +46,10 @@ python filter_single_isoform_scaflength_conditional.py Rnd1.all.maker.snapdragon
 
 #for smallii:
 python filter_single_isoform_scaflength_conditional.py smallii_NAMECHANGE_final_annotation.gff single_isoform_smallii_NAMECHANGE.gff
-
 ```
 
 b. Make .bed, protein.fasta, and nucleotide.cds files for each genome
-Additionally this filters CDS with premature stop codons.
+Additionally this filters CDS with premature stop codons. You will need the python package [`gffread`](https://anaconda.org/bioconda/gffread)
 
 ```shell
 #for barbatus:
@@ -76,6 +75,12 @@ gffread single_isoform_smallii_NAMECHANGE.gff --bed --keep-genes --sort-alpha -o
 
 gffread -y single_isoform_smallii_NAMECHANGE-protein-CMKEVH.fasta -x single_isoform_smallii_NAMECHANGE-nucleotide-CMKEVH.cds -C -M -K -E -V -H --sort-alpha -g smallii_NAMECHANGE_PGA_assembly.fasta single_isoform_smallii_NAMECHANGE-genes.bed
 
+
+#for kunthii:
+gffread single_isoform_kunthii_gemoma_barbref_NEWNAME.gff --bed --keep-genes --sort-alpha -o single_isoform_kunthii_gemoma_barbref_NEWNAME-genes.bed
+
+gffread -y single_isoform_kunthii_gemoma_barbref_NEWNAME-protein-CMKEVH.fasta -x single_isoform_kunthii_gemoma_barbref_NEWNAME-nucleotide-CMKEVH.cds -C -M -K -E -V -H --sort-alpha -g kunthii.genome.1mbp_NEWNAME.fasta single_isoform_kunthii_gemoma_barbref_NEWNAME-genes.bed
+
 ```
 
 
@@ -88,27 +93,24 @@ These steps will mirror closely those found in the jcvi [manual](https://github.
 conda activate jcvi
 
 #create anchors files and dotplots
-python -m jcvi.compara.catalog ortholog barbatus davidsonii --cscore=.99 --dbtype=nucl
-python -m jcvi.compara.catalog ortholog barbatus smallii --cscore=.99 --dbtype=nucl
-python -m jcvi.compara.catalog ortholog davidsonii petiolatus --cscore=.99 --dbtype=nucl
+python -m jcvi.compara.catalog ortholog barbatus davidsonii --cscore=.95 --dbtype=nucl
+python -m jcvi.compara.catalog ortholog barbatus smallii --cscore=.95 --dbtype=nucl
+python -m jcvi.compara.catalog ortholog davidsonii petiolatus --cscore=.95 --dbtype=nucl
 
 
 
-#extract subsets of blocks from anchorfile --minspan=30 --
+#extract subsets of blocks from anchorfile
 python -m jcvi.compara.synteny screen --simple barbatus.davidsonii.anchors barbatus.davidsonii.anchors.new
 python -m jcvi.compara.synteny screen --simple barbatus.smallii.anchors barbatus.smallii.anchors.new
 python -m jcvi.compara.synteny screen --simple davidsonii.petiolatus.anchors davidsonii.petiolatus.anchors.new
 
 
+
 #after organizing the seqids.txt and layout.txt files...
 python -m jcvi.graphics.karyotype seqids.txt layout.txt -o karyotype_barbatus.davidsonii.petiolatus.smallii.pdf
-
 
 ```
 
 And here is the finished product!
 ![karyotype_image](karyotype_barbatus.davidsonii.petiolatus.smallii.png)
-
-
-
 

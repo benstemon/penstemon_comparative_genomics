@@ -1,0 +1,4 @@
+Contig7,Contig1,Contig8,Contig9,Contig11,Contig13,Contig6,Contig5
+scaffold_1086,scaffold_1085,scaffold_2151,scaffold_2446,scaffold_2684,scaffold_2685,scaffold_1087,scaffold_2533,scaffold_2686,scaffold_2532,scaffold_2687,scaffold_2531
+LG01,LG02,LG03,LG04,LG05,LG06,LG07,LG08
+scaffold4,scaffold7,scaffold1,scaffold3,scaffold6,scaffold8,scaffold2,scaffold5

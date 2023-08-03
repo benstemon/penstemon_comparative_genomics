@@ -46,8 +46,9 @@ ref3gff="/work/bs66/project_compare_genomes/petiolatus/Rnd1.all.maker.snapdragon
   #run GeMoMa. filters:
   # absolute difference between # ref AAs and predicted AAs /proportion ref AAs <= 0.8
   GeMoMa GeMoMaPipeline threads=$NThreads \
-   AnnotationFinalizer.r=SIMPLE AnnotationFinalizer.p=$direcname \
+   AnnotationFinalizer.r=SIMPLE AnnotationFinalizer.p=$direcname- \
    p=false o=true GAF.tf=true \
+   AnnotationFinalizer.t=true \
    t=$refgenome outdir=outfiles_gemoma/ \
    s=own i=barbatus a=$ref1gff g=$ref1fa \
    s=own i=davidsonii a=$ref2gff g=$ref2fa \
