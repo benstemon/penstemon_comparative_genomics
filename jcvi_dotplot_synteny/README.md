@@ -74,13 +74,6 @@ gffread -y single_isoform_petiolatus-protein-CMKEVH.fasta -x single_isoform_peti
 gffread single_isoform_smallii_NAMECHANGE.gff --bed --keep-genes --sort-alpha -o single_isoform_smallii_NAMECHANGE-genes.bed
 
 gffread -y single_isoform_smallii_NAMECHANGE-protein-CMKEVH.fasta -x single_isoform_smallii_NAMECHANGE-nucleotide-CMKEVH.cds -C -M -K -E -V -H --sort-alpha -g smallii_NAMECHANGE_PGA_assembly.fasta single_isoform_smallii_NAMECHANGE-genes.bed
-
-
-#for kunthii:
-gffread single_isoform_kunthii_gemoma_barbref_NEWNAME.gff --bed --keep-genes --sort-alpha -o single_isoform_kunthii_gemoma_barbref_NEWNAME-genes.bed
-
-gffread -y single_isoform_kunthii_gemoma_barbref_NEWNAME-protein-CMKEVH.fasta -x single_isoform_kunthii_gemoma_barbref_NEWNAME-nucleotide-CMKEVH.cds -C -M -K -E -V -H --sort-alpha -g kunthii.genome.1mbp_NEWNAME.fasta single_isoform_kunthii_gemoma_barbref_NEWNAME-genes.bed
-
 ```
 
 
